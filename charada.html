@@ -1,0 +1,158 @@
+<html>
+
+<head>
+    <title>CHARADA</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="script.js"></script>
+</head>
+
+<body id="bodyClass">
+    <div id="bodyContainer">
+        <div id="blackContainer"></div>
+        <div id="victory">
+            <div id="exitVictory" onclick="CloseWindow()">x</div>
+            <div id="victoryIcon">
+                <!--<img src="correct.png" width="80"><br>-->
+            </div>
+            <div id="victoryMessage">
+
+            </div>
+            <div id="tableOverview">
+
+                <table class="goTable">
+                    <tr class="goTr">
+                        <td class="goTd" id="w00"></td>
+                        <td class="goTd" id="w01"></td>
+                        <td class="goTd" id="w02"></td>
+                        <td class="goTd" id="w03"></td>
+                        <td class="goTd" id="w04"></td>
+                    </tr>
+                    <tr class="goTr">
+                        <td class="goTd" id="w10"></td>
+                        <td class="goTd" id="w11"></td>
+                        <td class="goTd" id="w12"></td>
+                        <td class="goTd" id="w13"></td>
+                        <td class="goTd" id="w14"></td>
+                    </tr>
+                    <tr class="goTr">
+                        <td class="goTd" id="w20"></td>
+                        <td class="goTd" id="w21"></td>
+                        <td class="goTd" id="w22"></td>
+                        <td class="goTd" id="w23"></td>
+                        <td class="goTd" id="w24"></td>
+                    </tr>
+                    <tr class="goTr">
+                        <td class="goTd" id="w30"></td>
+                        <td class="goTd" id="w31"></td>
+                        <td class="goTd" id="w32"></td>
+                        <td class="goTd" id="w33"></td>
+                        <td class="goTd" id="w34"></td>
+                    </tr>
+                    <tr class="goTr">
+                        <td class="goTd" id="w40"></td>
+                        <td class="goTd" id="w41"></td>
+                        <td class="goTd" id="w42"></td>
+                        <td class="goTd" id="w43"></td>
+                        <td class="goTd" id="w44"></td>
+                    </tr>
+                </table>
+
+            </div>
+            <div id="wordOrSequence"></div>
+            <div id="btnVictory" onclick="RestartGame()"><b>Novo Jogo</b></div>
+        </div>
+
+        <div id="centerDiv">
+
+            <head>
+                <h1>CHARADA</h1>
+            </head>
+
+            <section>
+                <article>
+                    <table class="tableClass">
+                        <tr class="mainTr">
+                            <td class="mainTD" id="col00"></td>
+                            <td class="mainTD" id="col01"></td>
+                            <td class="mainTD" id="col02"></td>
+                            <td class="mainTD" id="col03"></td>
+                            <td class="mainTD" id="col04"></td>
+                        </tr>
+                        <tr class="mainTr">
+                            <td class="mainTD" id="col10"></td>
+                            <td class="mainTD" id="col11"></td>
+                            <td class="mainTD" id="col12"></td>
+                            <td class="mainTD" id="col13"></td>
+                            <td class="mainTD" id="col14"></td>
+                        </tr>
+                        <tr class="mainTr">
+                            <td class="mainTD" id="col20"></td>
+                            <td class="mainTD" id="col21"></td>
+                            <td class="mainTD" id="col22"></td>
+                            <td class="mainTD" id="col23"></td>
+                            <td class="mainTD" id="col24"></td>
+                        </tr>
+                        <tr class="mainTr">
+                            <td class="mainTD" id="col30"></td>
+                            <td class="mainTD" id="col31"></td>
+                            <td class="mainTD" id="col32"></td>
+                            <td class="mainTD" id="col33"></td>
+                            <td class="mainTD" id="col34"></td>
+                        </tr>
+                        <tr class="mainTr">
+                            <td class="mainTD" id="col40"></td>
+                            <td class="mainTD" id="col41"></td>
+                            <td class="mainTD" id="col42"></td>
+                            <td class="mainTD" id="col43"></td>
+                            <td class="mainTD" id="col44"></td>
+                        </tr>
+
+
+                    </table>
+                </article>
+                <article>
+                    <div class="KeyboardContainer">
+                        <div class="keyboardBig">
+                            <div class="keyElement" id="Q" onclick="Click('Q')">Q</div>
+                            <div class="keyElement" id="W" onclick="Click('W')">W</div>
+                            <div class="keyElement" id="E" onclick="Click('E')">E</div>
+                            <div class="keyElement" id="R" onclick="Click('R')">R</div>
+                            <div class="keyElement" id="T" onclick="Click('T')">T</div>
+                            <div class="keyElement" id="Y" onclick="Click('Y')">Y</div>
+                            <div class="keyElement" id="U" onclick="Click('U')">U</div>
+                            <div class="keyElement" id="I" onclick="Click('I')">I</div>
+                            <div class="keyElement" id="O" onclick="Click('O')">O</div>
+                            <div class="keyElement" id="P" onclick="Click('P')">P</div>
+                        </div>
+                        <div class="keyboardBig">
+                            <div class="keyElement" id="A" onclick="Click('A')">A</div>
+                            <div class="keyElement" id="S" onclick="Click('S')">S</div>
+                            <div class="keyElement" id="D" onclick="Click('D')">D</div>
+                            <div class="keyElement" id="F" onclick="Click('F')">F</div>
+                            <div class="keyElement" id="G" onclick="Click('G')">G</div>
+                            <div class="keyElement" id="H" onclick="Click('H')">H</div>
+                            <div class="keyElement" id="J" onclick="Click('J')">J</div>
+                            <div class="keyElement" id="K" onclick="Click('K')">K</div>
+                            <div class="keyElement" id="L" onclick="Click('L')">L</div>
+                            <div class="keyElement" id="Back" onclick="Erase()"><img src="backspace.png" width="40">
+                            </div>
+                        </div>
+                        <div class="keyboard">
+                            <div class="keyElement" id="Z" onclick="Click('Z')">Z</div>
+                            <div class="keyElement" id="X" onclick="Click('X')">X</div>
+                            <div class="keyElement" id="C" onclick="Click('C')">C</div>
+                            <div class="keyElement" id="V" onclick="Click('V')">V</div>
+                            <div class="keyElement" id="B" onclick="Click('B')">B</div>
+                            <div class="keyElement" id="N" onclick="Click('N')">N</div>
+                            <div class="keyElement" id="M" onclick="Click('M')">M</div>
+                            <div class="keyElement" id="Enter" onclick="Enter()">Enter</div>
+                        </div>
+                    </div>
+                </article>
+            </section>
+        </div>
+    </div>
+</body>
+
+</html>
