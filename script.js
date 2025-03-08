@@ -1,25 +1,17 @@
 var WordToFind = "AUREO";
-var words = ["PAREO", "FALHA", "NEVOA","NUTRE","CORTE","ARTES","RATOS","SALVO","SALVE","RAMPA",
-"RALOS","RAMOS","RASGO","AUTOR","ANTRO","ASTRO","PASTO","ROUCA","LOIRA","LORDE","SALMO","TAMPA",
-"LOTAR", "LOGAR","ALGUM","ALGAS","LISAS","PINHO", "VINHO", "LINHO","SOLOS","TOLOS","FOICE","CAMPO",
-"NINHO","MANCO","TANGO","FANHO", "BANCO","BANDA", "BANDO", "PALHA","GALHO","TALCO","COICE","VERDE",
-"FALSO", "BALAO","PEDRA","DEDAO","PAUTA", "TIGRE", "TIARA", "TURMA", "TURNO", "TCHAU","BOATE",
-"POMAR", "SOMAR", "DOMAR", "POLVO", "POMBO", "COPOS","MORNA", "MORCA","PALMA", "GAITA","COISA",
-"MULTA", "CHUVA", "DUNAS", "UNHAS","RUMOR", "TUMOR", "TUTOR", "PUNHO","ROUBO","CONDE","DOIDA", 
-"PUDOR", "PAVOR", "OUVIR", "TEMER", "TEMOR", "TENTE", "PENSA", "LENTE", "LENTO","CIANO","DOIDO",
-"GENTE", "FELIZ",  "NORTE","MENTA", "LENTA", "OESTE", "LESTE", "LETRA", "CERTA","TIROS","DORES",
-"ARMAS", "AUREO", "AUREA","CUIDA","CULPA", "LAMBE", "LAVAR", "GRITO","GENIO","GENTE","TONTA","CORES",
-"GEMEO", "PENTE", "GRUTA", "LAMBER","TRENO","REINO", "ROUPA", "RATOS","DENTE","MILHO","RONCA",
-"MOUSE", "OUROS", "TOURO", "COURO", "LEITE", "PORCO", "LOTES", "LEIGO", "COUVE","VENTO","RONCO",
-"BOSTA", "GOSTA","COSTA", "LINHA", "LENHA", "LIMBO", "QUEIJO", "LIRIO", "RAMOS","FACIL","VELHO","SEPIA",
-"NAVAL", "NATAL", "POUCO","JEITO", "SAUDE", "CHORO", "TEIAS", "TIRAS", "POEMA","BURRO","TABUA","BUNDA", "MUNDO",
-"PORTA", "JEITO", "GIRIA", "XEROX", "ENTES", "ANTES", "ALTOS", "ALVOS", "CALVO","CURVO","RASPA","RIFLE",
-"CALMO", "PATAS", "MANTO", "LITIO", "BORIO", "TORIO","TORAS", "MINHA", "PATOS","AUDIO","CASPA","CASCO",
-"MANHA","BOINA","NOITE", "SITIO", "OXIDO","MUTUA", "POETA","PONEI", "POLEN", "RUINA","SURTO",
-"LUTAR", "LUGAR","MUITO", "NUNCA","SUADA","OUTRA","OUTRO", "MUTUO", "RITMO","ROSTO", "GOSTO","POSTO","PENTE",
-"MIMOS","RASGO","IRMAO","RIMAR","DOMAR","POMAR","AMORA","POTRO","FRUTA","PLUMA","GATOS", "MORTA","BRITA",
-"SALDO", "MOITA", "COIFA", "NOIVA","NOIVO","TERRA","PALCO", "FARDA", "PERNA", "METRO", "MENOR", "MENOS", "MEDOS",
- "HEROI", "FAROL", "SONHO", "PAVOR", "LIMPA", "PAMPA", "VULTO", "CULTO", "CURTA", "CURTO", "TURVO", "PINGO", "PILHA", "FAUNA", "FLORA"]
+
+var words = [];
+
+function loadWords() {
+  fetch("data.json")
+    .then(response => response.json())
+    .then(data => {
+      words = data.words;
+      console.log("Palavras carregadas:", words);
+    })
+    .catch(error => console.error("Erro ao carregar palavras:", error));
+}
+
 var currentRow = 0;
 var currentColumn = 0;
 
@@ -71,13 +63,16 @@ var wonOrLose =false;
 
 var currentWord = "";
 
+let idsToRestore = [];
+
 function Click(letter) {
   
   if(board[0][0]===null){
     
+    loadWords();
     WordToFind = words[Math.floor(Math.random() * words.length)];
+    WordToFind = WordToFind.toUpperCase();
     //console.log("Palavra é "+WordToFind);
-
   }
   if (currentWord.length === 5 || gameIsOver===true) return;
   board[currentRow][currentColumn] = letter;
@@ -90,6 +85,13 @@ function Click(letter) {
   currentWord = currentWord + letter;
 
 }
+
+window.onload = function() {
+  loadWords();
+  WordToFind = words[Math.floor(Math.random() * words.length)];
+  WordToFind = WordToFind.toUpperCase();
+};
+
 
 function Enter() {
   if(gameIsOver && wonOrLose){
@@ -116,30 +118,44 @@ function CheckWord() {
   var foundCont = 0;
   for (var i = 0; i < 5; i++) {
       var character = board[currentRow][i];
+      idsToRestore.push(character);
       if (WordToFind.indexOf(character) > -1) {
         if (WordToFind[i] === character) {
           //alert("SAME POS!!!");
-          document.getElementById(boardIds[currentRow][i]).style.backgroundColor = "rgb(93, 230, 13)";
-          document.getElementById(character).style.backgroundColor = "rgb(93, 230, 13)";
-          document.getElementById(character).style.boxShadow="inset 0 -5px 0  rgb(51, 125, 7)";
+          
+          document.getElementById(boardIds[currentRow][i]).style.backgroundColor = "rgb(93, 230, 13)";   
+          document.getElementById(winBoardIds[currentRow][i]).style.backgroundColor = "rgb(93, 230, 13)";  
 
-          document.getElementById(winBoardIds[currentRow][i]).style.backgroundColor = "rgb(93, 230, 13)";
+          document.getElementById(character).classList.add("right");
+          if (document.getElementById(character).classList.contains("wrong")) {
+            document.getElementById(character).classList.remove("wrong");
+          }
+          if (document.getElementById(character).classList.contains("almost")) {
+            document.getElementById(character).classList.remove("almost");
+          }
           foundCont++;
         } else {
+          
           document.getElementById(boardIds[currentRow][i]).style.backgroundColor = "rgb(224, 177, 21)";
           document.getElementById(winBoardIds[currentRow][i]).style.backgroundColor = "rgb(224, 177, 21)";
-          document.getElementById(character).style.backgroundColor = "rgb(224, 177, 21)";
-          document.getElementById(character).style.boxShadow="inset 0 -5px 0 rgb(150, 118, 15)";
+
+         if (!document.getElementById(character).classList.contains("right") || document.getElementById(character).classList.length === 0) {
+            document.getElementById(character).classList.add("almost");
+         }
+         
+         
         }
         //alert(WordToFind + " caracter -" + character + " - hello found inside your_string: " + currentWord.indexOf(character));
       } else {
         document.getElementById(boardIds[currentRow][i]).style.backgroundColor = "rgb(146, 150, 146)";
         document.getElementById(winBoardIds[currentRow][i]).style.backgroundColor = "rgb(146, 150, 146)";
-        document.getElementById(character).style.backgroundColor = "rgb(146, 150, 146)";
-        document.getElementById(character).style.boxShadow="inset 0 -5px 0 rgb(83, 83, 83)";
+          document.getElementById(character).classList.add("wrong");
+        
       }
       document.getElementById(boardIds[currentRow][i]).style.color = "white";     
       document.getElementById(boardIds[currentRow][i]).style.textShadow ="2px 2px 2px rgb(25, 25, 25)";
+
+
   }
   if (foundCont === indexOfColumns + 1) {
     //alert("A palavra foi adivinhada! ");    
@@ -153,6 +169,28 @@ function CheckWord() {
   }
 }
 
+function RemoveKeyboardFormatting(){
+
+  for(let i=0; i<idsToRestore.length; i++){
+    let id = idsToRestore[i];
+    console.log("Pegando a letra: "+id);
+    let element = document.getElementById(id);
+    
+    if (element) {
+      if (element.classList.contains("right")) {
+        element.classList.remove("right");
+      }
+      if (element.classList.contains("wrong")) {
+        element.classList.remove("wrong");
+      }
+      if (element.classList.contains("almost")) {
+        element.classList.remove("almost");
+      }
+    }
+  }
+
+}
+
 function DisplayWinState(){
   wonOrLose = true;
   gameIsOver=true;
@@ -163,7 +201,9 @@ function DisplayWinState(){
   document.getElementById("victoryMessage").innerHTML =winMessage;
   document.getElementById("wordOrSequence").innerHTML = winFeedback+"<b>"+sequence+"</b><br>";
 
-  
+  if(sequence>0){
+    document.getElementById("sequence").innerHTML = "Sequencia atual: <strong>"+sequence+"</strong>";
+  }
 }
 
 function DisplayDefeatState(){
@@ -176,6 +216,8 @@ function DisplayDefeatState(){
   document.getElementById("victoryIcon").innerHTML ="<img src='"+defeatImage+"' width='70'><br>";
   document.getElementById("victoryMessage").innerHTML =defeatMessage;
   document.getElementById("wordOrSequence").innerHTML = defeatFeedback+"<br><b>"+WordToFind+"</b><br>";
+
+    document.getElementById("sequence").innerHTML = "";
 
 }
 
@@ -194,6 +236,18 @@ function CloseWindow(){
 }
 
 function RestartGame(){
+  RemoveKeyboardFormatting();
+  loadWords(); // Garante que novas palavras são carregadas a cada novo jogo
+
+  WordToFind = words[Math.floor(Math.random() * words.length)];
+  WordToFind = WordToFind.toUpperCase();
+  console.log(idsToRestore);
+  currentRow = 0;
+  currentColumn = 0;
+  gameIsOver = false;
+  wonOrLose = false;
+  currentWord = "";
+
   for(var i=0;i<=4;i++){
     for(var j=0;j<=4;j++){   
       document.getElementById( boardIds[i][j]).innerHTML = "&nbsp;";
@@ -202,14 +256,7 @@ function RestartGame(){
       document.getElementById( winBoardIds[i][j]).style.backgroundColor = "rgb(235, 243, 235)";
     }   
   }
-  for(var i=0;i<=4;i++){
-    for(var j=0;j<=4;j++){  
-      if(board[i][j]!==null){
-        document.getElementById( board[i][j]).style.backgroundColor =  "rgb(197, 191, 191)";
-        document.getElementById( board[i][j]).style.boxShadow ="inset 0 -5px 0 rgb(159, 154, 154)";
-      }
-      }
-    }
+
   board = [
     [null, null, null, null, null],
     [null, null, null, null, null],
@@ -217,11 +264,7 @@ function RestartGame(){
     [null, null, null, null, null],
     [null, null, null, null, null],
   ];
-   gameIsOver = false;
 
-  currentWord = "";
-  currentRow = 0;
-  currentColumn = 0;
   CloseWindow();
 
 

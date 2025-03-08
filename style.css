@@ -6,7 +6,7 @@
 }
 
 #bodyClass{
-    background-color: rgb(207, 200, 200);
+    background-color: rgb(118, 137, 155);
     color: #212c3a;
     margin:0;
     box-sizing: box-border;
@@ -23,7 +23,7 @@
     margin: 0 auto;    
     float: left;
     width: 700px;
-    background-color:rgb(220, 213, 213);
+    background-color:rgb(187, 209, 219);
     text-align: center;
     box-sizing: box-border;
 }
@@ -91,7 +91,7 @@ h1{
 
 
 .keyboard {
-    background-color: rgb(207, 216, 198);
+    background-color:  rgb(187, 209, 219);
     display: flex;
     flex-direction: row;
     align-items:  space-around;
@@ -104,7 +104,7 @@ h1{
 
 .keyboardBig{
   
-    background-color: rgb(207, 216, 198);
+    background-color: rgb(187, 209, 219);
     display: flex;
     flex-direction: row;
     align-items:  space-around;
@@ -199,24 +199,68 @@ h1{
     padding-top: 5px;
     padding-bottom: 5px;
     margin-bottom: 5px;
-    background-color: rgb(197, 191, 191);
+    background-color: rgb(191, 196, 197);
     border-radius: 10px ;
      /*box-shadow: -1px 2px 2px #212c3a ;*/
-     box-shadow: inset 0 -5px 0 rgb(159, 154, 154);
+     box-shadow: inset 0 -5px 0 rgb(154, 157, 159);
      color: rgb(45, 43, 43);
     font-size: 32pt;
     margin-left: 5px;
         
    }
 
+   .keyElement.right{    
+        background-color: rgb(93, 230, 13);
+        box-shadow: inset 0 -5px 0  rgb(51, 125, 7);        
+   }
+
+   .keyElement.wrong{
+        background-color: rgb(146, 150, 146);
+        box-shadow: inset 0 -5px 0 rgb(83, 83, 83);   
+
+   }
+
+   .keyElement.almost{
+
+        background-color:rgb(224, 177, 21);
+        box-shadow: inset 0 -5px 0 rgb(150, 118, 15);   
+
+   }
+
+   .keyElement.right:hover{
+    background-color: rgb(179, 252, 137);
+    box-shadow: inset 0 -5px 0  rgb(73, 179, 12);   
+   }
+   
+   .keyElement.wrong:hover{
+    background-color: rgb(189, 10, 10);
+        box-shadow: inset 0 -5px 0 rgb(129, 4, 4);   
+ 
+   }
+   
+   .keyElement.almost:hover{
+    background-color:rgb(250, 208, 71);
+    box-shadow: inset 0 -5px 0 rgb(201, 159, 23);     
+   }
+
 .keyElement:hover{
-        background-color: rgb(226, 209, 205);
+        background-color: rgb(8, 185, 255);
+        box-shadow: inset 0 -5px 0 rgb(10, 83, 151);   
         cursor: pointer;
 }
+
 
 .KeyboardContainer{
     margin:0;
     margin-top: 100px;
+}
 
-    
+.credits{
+    padding:10px;
+    text-align: center;
+}
+
+#sequence{
+    padding:10px;
+    text-align: center;
 }
