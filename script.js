@@ -90,11 +90,17 @@ function SortWord(){
   if(words.length===0){
     loadWords();
   }
+ // Aguarde até que words tenha elementos
+ if (words.length === 0) {
+  console.error("Nenhuma palavra carregada.");
+  return;
+}
 
-  do {
-    WordToFind = words[Math.floor(Math.random() * words.length)];
-    WordToFind = WordToFind.toUpperCase();
-  } while (WordToFind.length !== 5); //in case that the database have a word with more or less than 5 letters
+do {
+  WordToFind = words[Math.floor(Math.random() * words.length)];
+} while (!WordToFind || WordToFind.length !== 5); // Evita undefined/null e garante 5 letras
+
+WordToFind = WordToFind.toUpperCase();
 
 }
 
