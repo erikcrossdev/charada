@@ -67,12 +67,8 @@ let idsToRestore = [];
 
 function Click(letter) {
   
-  if(board[0][0]===null){
-    
-    loadWords();
-    WordToFind = words[Math.floor(Math.random() * words.length)];
-    WordToFind = WordToFind.toUpperCase();
-    //console.log("Palavra é "+WordToFind);
+  if(board[0][0]===null){    
+    SortWord();
   }
   if (currentWord.length === 5 || gameIsOver===true) return;
   board[currentRow][currentColumn] = letter;
@@ -86,11 +82,21 @@ function Click(letter) {
 
 }
 
-window.onload = function() {
-  loadWords();
-  WordToFind = words[Math.floor(Math.random() * words.length)];
-  WordToFind = WordToFind.toUpperCase();
+window.onload = function() { 
+  SortWord();
 };
+
+function SortWord(){
+  if(words.length===0){
+    loadWords();
+  }
+
+  do {
+    WordToFind = words[Math.floor(Math.random() * words.length)];
+    WordToFind = WordToFind.toUpperCase();
+  } while (WordToFind.length !== 5); //in case that the database have a word with more or less than 5 letters
+
+}
 
 
 function Enter() {
@@ -237,10 +243,7 @@ function CloseWindow(){
 
 function RestartGame(){
   RemoveKeyboardFormatting();
-  loadWords(); // Garante que novas palavras são carregadas a cada novo jogo
-
-  WordToFind = words[Math.floor(Math.random() * words.length)];
-  WordToFind = WordToFind.toUpperCase();
+  SortWord();
   console.log(idsToRestore);
   currentRow = 0;
   currentColumn = 0;
