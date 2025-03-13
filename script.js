@@ -7,7 +7,7 @@ function loadWords() {
     .then(response => response.json())
     .then(data => {
       words = data.words;
-      console.log("Palavras carregadas:", words);
+      //console.log("Palavras carregadas:", words);
     })
     .catch(error => console.error("Erro ao carregar palavras:", error));
 }
@@ -185,7 +185,7 @@ function RemoveKeyboardFormatting(){
 
   for(let i=0; i<idsToRestore.length; i++){
     let id = idsToRestore[i];
-    console.log("Pegando a letra: "+id);
+    //console.log("Pegando a letra: "+id);
     let element = document.getElementById(id);
     
     if (element) {
@@ -250,7 +250,7 @@ function CloseWindow(){
 function RestartGame(){
   RemoveKeyboardFormatting();
   SortWord();
-  console.log(idsToRestore);
+  //console.log(idsToRestore);
   currentRow = 0;
   currentColumn = 0;
   gameIsOver = false;
